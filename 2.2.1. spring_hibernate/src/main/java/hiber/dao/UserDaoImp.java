@@ -13,16 +13,17 @@ import java.util.List;
 
 @Repository
 public class UserDaoImp implements UserDao {
-
-   @Autowired
    private SessionFactory sessionFactory;
+   public UserDaoImp(SessionFactory sessionFactory) {
+      this.sessionFactory = sessionFactory;
+   }
 
    @Override
-   public void saveUser(User user) {
+   public void saveUsers(User user) {
       sessionFactory.getCurrentSession().save(user);
    }
 
-   public void saveCar(Car car){ sessionFactory.getCurrentSession().save(car);
+   public void saveCars(Car car){ sessionFactory.getCurrentSession().save(car);
    }
 
    @Override

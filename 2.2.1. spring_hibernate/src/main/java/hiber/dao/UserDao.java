@@ -6,9 +6,9 @@ import hiber.model.User;
 import java.util.List;
 
 public interface UserDao {
-   void saveUser(User user);
+   void saveUsers(User user);
    List<User> getListUsers();
-   void saveCar(Car car);
+   void saveCars(Car car);
    List<Car> getListCars();
    User getUserByModelAndSeriesCar(String model, int series);
 }

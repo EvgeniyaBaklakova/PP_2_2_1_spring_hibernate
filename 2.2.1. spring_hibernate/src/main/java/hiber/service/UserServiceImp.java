@@ -12,17 +12,18 @@ import java.util.List;
 @Transactional
 @Service
 public class UserServiceImp implements UserService {
-
-   @Autowired
    private UserDao userDao;
-
-   @Override
-   public void add(User user) {
-      userDao.saveUser(user);
+   public UserServiceImp(UserDao userDao) {
+      this.userDao = userDao;
    }
 
    @Override
-   public void addCar(Car car){userDao.saveCar(car);}
+   public void saveUsers(User user) {
+      userDao.saveUsers(user);
+   }
+
+   @Override
+   public void saveCars(Car car){userDao.saveCars(car);}
 
    @Override
    public List<Car> listCar() {
