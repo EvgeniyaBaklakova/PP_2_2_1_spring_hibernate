@@ -18,34 +18,28 @@ public class UserDaoImp implements UserDao {
    private SessionFactory sessionFactory;
 
    @Override
-   public void add(User user) {
+   public void saveUser(User user) {
       sessionFactory.getCurrentSession().save(user);
    }
 
-   public void addCar(Car car){ sessionFactory.getCurrentSession().save(car);
+   public void saveCar(Car car){ sessionFactory.getCurrentSession().save(car);
    }
 
    @Override
-   public List<Car> listCar() {
-      Query query = sessionFactory.getCurrentSession().createQuery("from Car");
-      return query.getResultList();
+   public List<Car> getListCars() {
+      return sessionFactory.getCurrentSession().createQuery("from Car").getResultList();
    }
-
-
 
    @Override
    @SuppressWarnings("unchecked")
-   public List<User> listUsers() {
-      TypedQuery<User> query=sessionFactory.getCurrentSession().createQuery("from User");
-      return query.getResultList();
+   public List<User> getListUsers() {
+      return sessionFactory.getCurrentSession().createQuery("from User").getResultList();
    }
 
    @Override
-   public User getUserByIdCar(String model, int series) {
-      Query query = sessionFactory.getCurrentSession().createQuery(" from User u where u.car.model = :model" +
-              " and u.car.series = :series");
-      User user = (User) query.setParameter("model", model).setParameter("series", series).getSingleResult();
-      return user;
-
+   public User getUserByModelAndSeriesCar(String model, int series) {
+      Query<User> query = sessionFactory.getCurrentSession().createQuery(" from User u where u.car.model = :model" +
+              " and u.car.series = :series").setParameter("model", model).setParameter("series", series);
+      return query.getSingleResult();
    }
 }
